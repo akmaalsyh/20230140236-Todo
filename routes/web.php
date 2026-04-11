@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,6 +27,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
     Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
+    Route::get('/product/export', function () {
+        return "Exporting products... (Only Admin)";
+    })->middleware('can:export-product')->name('product.export');
+
+    // Kategori Route
+    Route::get('/kategori', function () {
+        return "Kategori Page (Secured by manage-product Gate)";
+    })->middleware('can:manage-product')->name('kategori.index');
+
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
