@@ -10,7 +10,21 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#0a0a0a] flex items-center justify-center min-h-screen p-6">
+<body class="bg-[#0a0a0a] flex items-center justify-center min-h-screen p-6 text-[#EDEDEC]">
+
+    @if (Route::has('login'))
+        <div class="absolute top-0 right-0 p-6 text-right z-10">
+            @auth
+                <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Log in</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-400 hover:text-white transition-colors">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif
 
     <div class="w-full max-w-md p-8 bg-[#161615] rounded-lg shadow-[inset_0px_0px_0px_1px_#fffaed2d] text-[#EDEDEC]">
         
@@ -21,7 +35,7 @@
 
         <div class="mt-4">
             <a href="#" class="inline-block px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition-colors">
-                Modul Pertemuan 1
+                Pemrograman Web Framework
             </a>
         </div>
 

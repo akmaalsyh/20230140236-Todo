@@ -13,17 +13,8 @@
                             </p>
                         </div>
                         <div class="flex gap-2">
-                            @can('export-product')
-                                <a href="{{ route('product.export') }}"
-                                    class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition duration-150 shadow-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Export Product
-                                </a>
-                            @endcan
+
+                            @can('create', App\Models\Product::class)
                             <a href="{{ route('product.create') }}"
                                 class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition duration-150 shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -33,6 +24,7 @@
                                 </svg>
                                 Add Product
                             </a>
+                            @endcan
                         </div>
                     </div>
 
@@ -78,8 +70,8 @@
                                             {{ $product->name }}</td>
                                         <td class="px-6 py-4">
                                             <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $product->quantity > 10 ? 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300' }}">
-                                                {{ $product->quantity }}
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $product->qty > 10 ? 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300' }}">
+                                                {{ $product->qty }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 font-mono text-gray-700 dark:text-gray-300 text-sm">

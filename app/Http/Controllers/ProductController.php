@@ -18,9 +18,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        Gate::authorize('create', Product::class);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'quantity' => 'required|integer',
+            'qty' => 'required|integer',
             'price' => 'required|numeric',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -32,6 +34,7 @@ class ProductController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', Product::class);
         $users = User::orderBy('name')->get();
 
         return view('product.create', compact('users'));
@@ -51,7 +54,7 @@ class ProductController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'quantity' => 'sometimes|integer',
+            'qty' => 'sometimes|integer',
             'price' => 'sometimes|numeric',
             'user_id' => 'sometimes|exists:users,id',
         ]);
