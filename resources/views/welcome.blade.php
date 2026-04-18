@@ -13,16 +13,11 @@
 <body class="bg-[#0a0a0a] flex items-center justify-center min-h-screen p-6 text-[#EDEDEC]">
 
     @if (Route::has('login'))
-        <div class="absolute top-0 right-0 p-6 text-right z-10">
-            @auth
-                <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Log in</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-400 hover:text-white transition-colors">Register</a>
-                @endif
-            @endauth
+        <div class="absolute top-0 right-0 p-6 text-right z-10 flex items-center gap-4">
+            <a href="{{ route('login') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Log in</a>
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="font-semibold text-gray-400 hover:text-white transition-colors">Register</a>
+            @endif
         </div>
     @endif
 
