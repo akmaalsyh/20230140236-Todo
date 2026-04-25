@@ -27,6 +27,7 @@ class ProductController extends Controller
         $validated = $request->validated();
 
         try {
+            $validated['user_id'] = Auth::id(); // Assign current user
             // 3. Proses Simpan ke Database
             Product::create($validated);
 
@@ -62,8 +63,9 @@ class ProductController extends Controller
     {
         Gate::authorize('create', Product::class);
         $users = User::orderBy('name')->get();
+        $categories = \App\Models\Category::orderBy('name')->get();
 
-        return view('product.create', compact('users'));
+        return view('product.create', compact('users', 'categories'));
     }
 
     public function show($id)
@@ -79,6 +81,7 @@ class ProductController extends Controller
         Gate::authorize('update', $product);
 
         $validated = $request->validated();
+        $validated['user_id'] = Auth::id();
 
         $product->update($validated);
 
@@ -89,8 +92,9 @@ class ProductController extends Controller
     {
         Gate::authorize('update', $product);
         $users = User::orderBy('name')->get();
+        $categories = \App\Models\Category::orderBy('name')->get();
 
-        return view('product.edit', compact('product', 'users'));
+        return view('product.edit', compact('product', 'users', 'categories'));
     }
 
     public function delete($id)

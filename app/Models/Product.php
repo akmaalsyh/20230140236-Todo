@@ -11,12 +11,12 @@ class Product extends Model
 {
     /**
      * Atribut yang dapat diisi.
-     * Sesuai ERD: user_id, name, qty, price.
      */
     use HasFactory;
 
     protected $fillable = [
         'user_id',
+        'category_id',
         'name',
         'qty',
         'price',
@@ -31,11 +31,10 @@ class Product extends Model
     }
 
     /**
-     * RELASI: Product memiliki banyak Kategori (One to Many).
-     * Sesuai ERD, tabel Category menyimpan product_id.
+     * RELASI: Product dimiliki oleh satu Category (Many to One).
      */
-    public function categories(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

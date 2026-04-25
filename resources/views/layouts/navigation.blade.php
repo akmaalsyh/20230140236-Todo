@@ -18,6 +18,11 @@
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
                         {{ __('Product') }}
                     </x-nav-link>
+                    @can('manage-category')
+                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
+                        {{ __('Category') }}
+                    </x-nav-link>
+                    @endcan
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-nav-link>
@@ -30,7 +35,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }} ({{ Auth::user()->role }})</div>
+                            <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +91,11 @@
             <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
                 {{ __('Product') }}
             </x-responsive-nav-link>
+            @can('manage-category')
+            <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
+                {{ __('Category') }}
+            </x-responsive-nav-link>
+            @endcan
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-responsive-nav-link>
@@ -94,8 +104,7 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}
-                    ({{ Auth::user()->role }})</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 

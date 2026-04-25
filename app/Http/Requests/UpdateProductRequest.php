@@ -25,7 +25,7 @@ class UpdateProductRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
             'qty' => 'required|integer',
             'price' => 'required|numeric',
-            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 
@@ -42,8 +42,8 @@ class UpdateProductRequest extends FormRequest
             'price.required' => 'Harga produk wajib diisi.',
             'price.numeric' => 'Harga produk harus berupa angka yang valid.',
             
-            'user_id.required' => 'Owner wajib dipilih.',
-            'user_id.exists' => 'Owner tidak valid.',
+            'category_id.required' => 'Kategori wajib dipilih.',
+            'category_id.exists' => 'Kategori tidak valid.',
         ];
     }
 }

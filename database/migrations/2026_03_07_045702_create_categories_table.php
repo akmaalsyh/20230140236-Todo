@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
     Schema::create('categories', function (Blueprint $table) {
-        $table->id(); // int (primary key)
-        $table->string('name'); // varchar
-        $table->foreignId('product_id')->constrained('products')->onDelete('cascade'); // foreign key ke products
+        $table->id();
+        $table->string('name')->unique();
         $table->timestamps();
     });
     }

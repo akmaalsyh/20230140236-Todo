@@ -33,10 +33,15 @@ Route::middleware('auth')->group(function () {
         return "Exporting products... (Only Admin)";
     })->middleware('can:export-product')->name('product.export');
 
-    // Kategori Route
-    Route::get('/kategori', function () {
-        return "Kategori Page (Secured by manage-product Gate)";
-    })->middleware('can:manage-product')->name('kategori.index');
+    // Category Routes (Secured by manage-category Gate)
+    Route::middleware('can:manage-category')->group(function () {
+        Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+        Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
+        Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/{category}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('/category/{category}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/category/{category}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('category.delete');
+    });
 
 });
 

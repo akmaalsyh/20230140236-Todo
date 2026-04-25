@@ -4,27 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
     /**
      * Atribut yang dapat diisi.
-     * Sesuai ERD: product_id, name.
      */
 
     use HasFactory;
 
     protected $fillable = [
-        'product_id',
         'name',
     ];
 
     /**
-     * RELASI: Category merujuk ke satu Product (Many to One).
+     * RELASI: Category memiliki banyak Product (One to Many).
      */
-    public function product(): BelongsTo
+    public function products(): HasMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

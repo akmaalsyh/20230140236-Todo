@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
     Schema::create('products', function (Blueprint $table) {
-        $table->id(); // int (primary key)
-        $table->string('name'); // varchar
-        $table->integer('qty'); // int
-        $table->decimal('price', 15, 2); // decimal
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // foreign key ke users
+        $table->id();
+        $table->string('name');
+        $table->integer('qty');
+        $table->decimal('price', 15, 2);
+        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         $table->timestamps();
     });
     }
